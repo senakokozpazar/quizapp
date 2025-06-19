@@ -1,0 +1,14 @@
+/Users/d1-19/Projects/quizapp.web/quizapp.data/bin/Debug/net7.0/quizapp.data.deps.json
+/Users/d1-19/Projects/quizapp.web/quizapp.data/bin/Debug/net7.0/quizapp.data.runtimeconfig.json
+/Users/d1-19/Projects/quizapp.web/quizapp.data/bin/Debug/net7.0/quizapp.data.dll
+/Users/d1-19/Projects/quizapp.web/quizapp.data/bin/Debug/net7.0/quizapp.data.pdb
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.csproj.AssemblyReference.cache
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.GeneratedMSBuildEditorConfig.editorconfig
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.AssemblyInfoInputs.cache
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.AssemblyInfo.cs
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.csproj.CoreCompileInputs.cache
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.dll
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/refint/quizapp.data.dll
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.pdb
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/quizapp.data.genruntimeconfig.cache
+/Users/d1-19/Projects/quizapp.web/quizapp.data/obj/Debug/net7.0/ref/quizapp.data.dll
