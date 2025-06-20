@@ -8,4 +8,15 @@
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <ProjectReference Include="..\quizapp.data\quizapp.data.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\Quiz\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Quiz\" />
+  </ItemGroup>
 </Project>

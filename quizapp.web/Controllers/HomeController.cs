@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using quizapp.data.Models;
 using quizapp.web.Models;
 
 namespace quizapp.web.Controllers;
@@ -7,9 +8,11 @@ namespace quizapp.web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    
 
     public HomeController(ILogger<HomeController> logger)
     {
+        
         _logger = logger;
     }
 

@@ -36,9 +36,7 @@ public partial class QuizappContext : DbContext
             entity.Property(e => e.AnswerId).HasColumnName("answer_id");
             entity.Property(e => e.IsCorrect).HasColumnName("is_correct");
             entity.Property(e => e.QuestionId).HasColumnName("question_id");
-            entity.Property(e => e.Text)
-                .HasMaxLength(50)
-                .HasColumnName("text");
+            entity.Property(e => e.Text).HasColumnName("text");
 
             entity.HasOne(d => d.Question).WithMany(p => p.Answers)
                 .HasForeignKey(d => d.QuestionId)
@@ -49,12 +47,9 @@ public partial class QuizappContext : DbContext
         {
             entity.Property(e => e.QuestionId).HasColumnName("question_id");
             entity.Property(e => e.QuizId).HasColumnName("quiz_id");
-            entity.Property(e => e.Text)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("text");
+            entity.Property(e => e.Text).HasColumnName("text");
 
-            entity.HasOne(d => d.Quiz).WithMany(p => p.InverseQuiz)
+            entity.HasOne(d => d.Quiz).WithMany(p => p.Questions)
                 .HasForeignKey(d => d.QuizId)
                 .HasConstraintName("FK_Questions_Quizzes");
         });
@@ -63,8 +58,7 @@ public partial class QuizappContext : DbContext
         {
             entity.Property(e => e.QuizId).HasColumnName("quiz_id");
             entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .IsUnicode(false)
+                .HasMaxLength(500)
                 .HasColumnName("description");
             entity.Property(e => e.QuizTitle)
                 .HasMaxLength(50)

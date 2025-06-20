@@ -10,4 +10,6 @@ public partial class Quiz
     public string? QuizTitle { get; set; }
 
     public string? Description { get; set; }
+
+    public virtual ICollection<Question> Questions { get; } = new List<Question>();
 }

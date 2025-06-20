@@ -1,0 +1,39 @@
+﻿@model quizapp.data.Models.Question
+
+@{
+    ViewData["Title"] = "Quiz Başlat";
+    int selectedAnswerId = ViewBag.SelectedAnswerId != null ? (int)ViewBag.SelectedAnswerId : 0;
+    bool? isCorrect = ViewBag.IsCorrect as bool?;
+}
+
+<h2>@Model.Text</h2>
+
+<form id="answerForm" method="post" asp-action="SubmitAnswer" asp-controller="Quiz">
+    <input type="hidden" name="quizId" value="@ViewBag.QuizId" />
+    <input type="hidden" name="questionId" value="@Model.QuestionId" />
+    <div class="list-group">
+        @foreach (var answer in Model.Answers)
+        {
+            var cssClass = "";
+
+            if (selectedAnswerId == answer.AnswerId)
+            {
+                if (isCorrect == true)
+                {
+                    cssClass = "list-group-item-success"; // Yeşil
+                }
+                else
+                {
+                    cssClass = "list-group-item-danger"; // Kırmızı
+                }
+            }
+
+            <label class="list-group-item @cssClass" style="cursor:pointer;">
+                <input type="radio" name="selectedAnswerId" value="@answer.AnswerId" @(selectedAnswerId == answer.AnswerId ? "checked" : "") />
+                @answer.Text
+            </label>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">İleri</button>
+</form>

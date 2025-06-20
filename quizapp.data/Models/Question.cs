@@ -13,7 +13,5 @@ public partial class Question
 
     public virtual ICollection<Answer> Answers { get; } = new List<Answer>();
 
-    public virtual ICollection<Question> InverseQuiz { get; } = new List<Question>();
-
-    public virtual Question? Quiz { get; set; }
+    public virtual Quiz? Quiz { get; set; }
 }

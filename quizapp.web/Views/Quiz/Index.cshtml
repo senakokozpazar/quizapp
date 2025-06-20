@@ -1,0 +1,33 @@
+﻿@model IEnumerable<quizapp.data.Models.Quiz>
+@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<h1 class="text-center text-dark my-4">QuizApp – Bilgini Test Et!</h1>
+
+<div class="row">
+    @foreach (var quiz in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary" style="color:#660099">@quiz.QuizTitle</h5>
+                    <p class="card-text text-secondary">@quiz.Description</p>
+                    <button class="btn btn-primary w-100" style="background-color:#120A8F" onclick="startQuiz(@quiz.QuizId)">
+                        Quize Başla
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>function startQuiz(quizId) {
+            if (confirm("Quize başlamak istiyor musunuz?")) {
+                window.location.href = `/Quiz/Start?quizId=${quizId}`;
+            }
+        }</script>
+}
+
+
