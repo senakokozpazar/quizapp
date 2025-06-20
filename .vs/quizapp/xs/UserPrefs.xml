@@ -1,23 +1,43 @@
 ﻿<Properties StartupConfiguration="{2BAF07FA-D136-40B1-8EB3-B509AE52FC7E}|https">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.quizapp.web PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="quizapp.web/Views/Quiz/Index.cshtml">
+    <Files>
+      <File FileName="quizapp.web/Controllers/QuizController.cs" Line="37" Column="52" />
+      <File FileName="quizapp.web/Views/Quiz/QuizFinished.cshtml" Line="3" Column="36" />
+      <File FileName="quizapp.web/Views/Quiz/Start.cshtml" Line="16" Column="10" />
+      <File FileName="quizapp.web/Views/Quiz/Index.cshtml" Line="98" Column="1" />
+      <File FileName="quizapp.web/Views/User/User.cshtml" Line="1" Column="1" />
+      <File FileName="quizapp.web/Controllers/UserController.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="quizapp" expanded="True" selected="True">
+          <Node name="quizapp">
             <Node name="quizapp.data" expanded="True">
               <Node name="Dependencies" expanded="True" />
+              <Node name="Models" expanded="True" />
+            </Node>
+            <Node name="quizapp.web">
+              <Node name="Dependencies" expanded="True">
+                <Node name="ProjectDependencies" expanded="True" />
+              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Views">
+                <Node name="Quiz">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
+                <Node name="User" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.quizapp.web PreferredExecutionTarget="/Applications/Google Chrome.app" FirstBuild="True" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.quizapp.data FirstBuild="True" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>
