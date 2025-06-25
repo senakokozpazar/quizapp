@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using quizapp.data.Models;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.AspNetCore.Http;
 
 namespace quizapp.web.Controllers
 {
     public class QuizController : Controller
     {
-
         private readonly QuizappContext _context;
 
         public QuizController(QuizappContext context)
         {
             _context = context;
         }
-        // GET: /<controller>/
+
+        // GET: /Quiz/
         public IActionResult Index()
         {
             var list = _context.Quizzes.ToList();
@@ -38,7 +34,6 @@ namespace quizapp.web.Controllers
                     .OrderBy(q => q.QuestionId)
                     .FirstOrDefault();
 
-                // Skoru sıfırla, yeni quiz başlatılıyor
                 HttpContext.Session.SetInt32("Score", 0);
             }
             else
@@ -55,7 +50,22 @@ namespace quizapp.web.Controllers
 
             ViewBag.QuizId = quizId;
 
-            // Doğru/yanlış sonucunu göster (SubmitAnswer’dan geliyor)
+            // Geri tuşu için önceki soru id’si
+            var previousQuestion = _context.Questions
+                .Where(q => q.QuizId == quizId && q.QuestionId < question.QuestionId)
+                .OrderByDescending(q => q.QuestionId)
+                .FirstOrDefault();
+
+            if (previousQuestion != null)
+            {
+                ViewBag.HasPreviousQuestion = true;
+                ViewBag.PreviousQuestionId = previousQuestion.QuestionId;
+            }
+            else
+            {
+                ViewBag.HasPreviousQuestion = false;
+            }
+
             if (TempData.ContainsKey("IsCorrect"))
                 ViewBag.IsCorrect = (bool)TempData["IsCorrect"];
 
@@ -75,16 +85,13 @@ namespace quizapp.web.Controllers
 
             bool isCorrect = selectedAnswer.IsCorrect ?? false;
 
-            // Skoru sessionda tut
             int currentScore = HttpContext.Session.GetInt32("Score") ?? 0;
             if (isCorrect) currentScore++;
             HttpContext.Session.SetInt32("Score", currentScore);
 
-            // TempData ile sonucu Start view'a aktar
             TempData["IsCorrect"] = isCorrect;
             TempData["SelectedAnswerId"] = selectedAnswerId;
 
-            // Sonraki soruyu al
             var nextQuestion = _context.Questions
                 .Include(q => q.Answers)
                 .Where(q => q.QuizId == quizId && q.QuestionId > questionId)
@@ -93,7 +100,6 @@ namespace quizapp.web.Controllers
 
             if (nextQuestion == null)
             {
-                // Quiz bitti, skoru gönder
                 return RedirectToAction("QuizFinished");
             }
 

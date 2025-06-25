@@ -8,12 +8,15 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="quizapp.web/Views/Quiz/Index.cshtml">
     <Files>
-      <File FileName="quizapp.web/Controllers/QuizController.cs" Line="37" Column="52" />
-      <File FileName="quizapp.web/Views/Quiz/QuizFinished.cshtml" Line="3" Column="36" />
-      <File FileName="quizapp.web/Views/Quiz/Start.cshtml" Line="16" Column="10" />
-      <File FileName="quizapp.web/Views/Quiz/Index.cshtml" Line="98" Column="1" />
-      <File FileName="quizapp.web/Views/User/User.cshtml" Line="1" Column="1" />
-      <File FileName="quizapp.web/Controllers/UserController.cs" Line="1" Column="1" />
+      <File FileName="quizapp.web/Controllers/QuizController.cs" />
+      <File FileName="quizapp.web/Views/Quiz/QuizFinished.cshtml" />
+      <File FileName="quizapp.web/Views/Quiz/Start.cshtml" />
+      <File FileName="quizapp.web/Views/Quiz/Index.cshtml" Line="86" Column="3" />
+      <File FileName="quizapp.web/Controllers/UserController.cs" />
+      <File FileName="quizapp.web/appsettings.json" />
+      <File FileName="quizapp.web/Program.cs" />
+      <File FileName="quizapp.web/Views/User/Index.cshtml" />
+      <File FileName="quizapp.web/Views/Shared/_Layout.cshtml" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,15 +26,14 @@
               <Node name="Dependencies" expanded="True" />
               <Node name="Models" expanded="True" />
             </Node>
-            <Node name="quizapp.web">
-              <Node name="Dependencies" expanded="True">
-                <Node name="ProjectDependencies" expanded="True" />
-              </Node>
+            <Node name="quizapp.web" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Views">
-                <Node name="Quiz">
+              <Node name="Views" expanded="True">
+                <Node name="Home" expanded="True" />
+                <Node name="Quiz" expanded="True">
                   <Node name="Index.cshtml" selected="True" />
                 </Node>
+                <Node name="Shared" expanded="True" />
                 <Node name="User" expanded="True" />
               </Node>
             </Node>

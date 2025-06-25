@@ -6,34 +6,240 @@
     bool? isCorrect = ViewBag.IsCorrect as bool?;
 }
 
-<h2>@Model.Text</h2>
+<!-- Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-papbSg+Wt1q+lh5YFvRXA+fYffDWXmrLXhbTytW2PEz09uF2WnBiAAOJ1JeUY9fo3snIxox+5O8c8hSLVxKjwQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<form id="answerForm" method="post" asp-action="SubmitAnswer" asp-controller="Quiz">
-    <input type="hidden" name="quizId" value="@ViewBag.QuizId" />
-    <input type="hidden" name="questionId" value="@Model.QuestionId" />
-    <div class="list-group">
-        @foreach (var answer in Model.Answers)
+<div class="container py-5 quiz-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        @if ((bool)ViewBag.HasPreviousQuestion)
         {
-            var cssClass = "";
-
-            if (selectedAnswerId == answer.AnswerId)
-            {
-                if (isCorrect == true)
-                {
-                    cssClass = "list-group-item-success"; // Yeşil
-                }
-                else
-                {
-                    cssClass = "list-group-item-danger"; // Kırmızı
-                }
-            }
-
-            <label class="list-group-item @cssClass" style="cursor:pointer;">
-                <input type="radio" name="selectedAnswerId" value="@answer.AnswerId" @(selectedAnswerId == answer.AnswerId ? "checked" : "") />
-                @answer.Text
-            </label>
+            <a class="btn btn-outline-secondary"
+               href="@Url.Action("Start", "Quiz", new { quizId = ViewBag.QuizId, questionId = ViewBag.PreviousQuestionId })">
+                <i class="bi bi-arrow-left"></i> Geri
+            </a>
+        }
+        else
+        {
+            <div></div>
         }
     </div>
 
-    <button type="submit" class="btn btn-primary mt-3">İleri</button>
-</form>
+    <div class="question-box mb-4">
+        <div class="lightbulb-icon">
+            <i class="fas fa-lightbulb"></i>
+        </div>
+
+        <h2 class="question-text">@Model.Text</h2>
+    </div>
+
+    <form id="answerForm" method="post" asp-action="SubmitAnswer" asp-controller="Quiz">
+        <input type="hidden" name="quizId" value="@ViewBag.QuizId" />
+        <input type="hidden" name="questionId" value="@Model.QuestionId" />
+
+        <div class="d-grid gap-3">
+            @foreach (var answer in Model.Answers)
+            {
+                <label class="answer-option p-3 rounded shadow-sm d-flex align-items-center" style="cursor:pointer;">
+                    <input type="radio" name="selectedAnswerId" value="@answer.AnswerId" class="form-check-input me-3"
+                           @(selectedAnswerId == answer.AnswerId ? "checked" : "") />
+                    <span class="answer-text flex-grow-1">@answer.Text</span>
+                </label>
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4 w-100 submit-button">İleri <i class="bi bi-arrow-right-circle"></i></button>
+    </form>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0a0a2a 0%, #1a0a3a 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #e0e0e0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+
+    .quiz-container {
+        background-color: transparent;
+        max-width: 700px;
+        padding: 40px;
+    }
+
+    .question-box {
+        position: relative;
+        background-color: transparent;
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 30px 40px 30px 80px;
+        margin-bottom: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 120px;
+        box-shadow: 0 0 10px rgba(100, 255, 255, 0.6),
+                    0 0 20px rgba(100, 255, 255, 0.4),
+                    0 0 30px rgba(100, 255, 255, 0.2);
+        animation: glow 1.5s infinite alternate;
+    }
+
+    .question-box::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+        border-radius: 18px;
+        padding: 3px;
+        background: linear-gradient(45deg, #00ffff, #ff00ff, #ffea00);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        z-index: -1;
+    }
+
+    .question-text {
+        color: #fff;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 0;
+        flex-grow: 1;
+        text-shadow: 0 0 5px rgba(255,255,255,0.7);
+    }
+
+    .lightbulb-icon {
+        font-size: 40px;
+        color: #ffd700;
+        filter: drop-shadow(0 0 12px #ffd700);
+        transition: filter 0.3s ease;
+        margin-right: 20px;
+    }
+
+    .lightbulb-icon:hover {
+        filter: drop-shadow(0 0 18px #fff700);
+        cursor: pointer;
+    }
+
+    .answer-option {
+        background-color: transparent;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        color: #e0e0e0;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 5px rgba(100, 255, 255, 0.3),
+                    0 0 10px rgba(100, 255, 255, 0.2);
+    }
+
+    .answer-option::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border-radius: 12px;
+        background: linear-gradient(45deg, #00ffff, #ff00ff);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease, background 0.3s ease;
+    }
+
+    .answer-option:hover::before,
+    .answer-option input[type="radio"]:checked + .answer-text::before {
+        opacity: 1;
+    }
+
+    .answer-option:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(100, 255, 255, 0.7),
+                    0 0 25px rgba(100, 255, 255, 0.5);
+    }
+
+    .form-check-input {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        border: 2px solid #00ffff;
+        background-color: #0d0d2a;
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 50%;
+        position: relative;
+        flex-shrink: 0;
+    }
+
+    .form-check-input:checked {
+        background-color: #00ffff;
+        border-color: #00ffff;
+    }
+
+    .form-check-input:checked::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        background-color: #0d0d2a;
+        border-radius: 50%;
+    }
+
+    .answer-text {
+        font-size: 1.2rem;
+        color: #e0e0e0;
+        text-shadow: 0 0 3px rgba(255,255,255,0.5);
+    }
+
+    .submit-button {
+        background: linear-gradient(45deg, #00ffff, #ff00ff);
+        border: none;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 15px 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7),
+                    0 0 25px rgba(0, 255, 255, 0.5);
+        transition: all 0.3s ease;
+    }
+
+    .submit-button:hover {
+        background: linear-gradient(45deg, #ff00ff, #00ffff);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.9),
+                    0 0 30px rgba(0, 255, 255, 0.7);
+        transform: translateY(-2px);
+    }
+
+    @@keyframes glow {
+        0% {
+            box-shadow: 0 0 10px rgba(100, 255, 255, 0.6),
+                        0 0 20px rgba(100, 255, 255, 0.4),
+                        0 0 30px rgba(100, 255, 255, 0.2);
+        }
+        50% {
+            box-shadow: 0 0 15px rgba(100, 255, 255, 0.8),
+                        0 0 25px rgba(100, 255, 255, 0.6),
+                        0 0 35px rgba(100, 255, 255, 0.4);
+        }
+        100% {
+            box-shadow: 0 0 10px rgba(100, 255, 255, 0.6),
+                        0 0 20px rgba(100, 255, 255, 0.4),
+                        0 0 30px rgba(100, 255, 255, 0.2);
+        }
+    }
+</style>

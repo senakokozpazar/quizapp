@@ -6,14 +6,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - QuizApp</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+
     <style>
-        body {
-            background-color: #F2F2F2;
+        /* Genel site düzeni için temel ayarlar */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* Quiz sayfası kendisi özel bir arka plan ayarladığı için burası yorumda */
+        /* body {
+            background-color: #F2F2F2;
+        } */
+
         .navbar {
-            background-color: #660099;
+            background-color: #660099; /* Deep purple */
         }
 
         .navbar-brand, .nav-link, .footer-text {
@@ -24,6 +37,16 @@
             background-color: #120A8F;
             padding: 1rem;
             text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .card:hover {
@@ -31,20 +54,22 @@
             transition: all 0.3s ease;
         }
     </style>
+
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
+        <nav class="navbar navbar-expand-lg container-fluid px-0">
+            <div class="w-100 d-flex justify-content-between align-items-center px-4">
                 <a class="navbar-brand" href="/">QuizApp</a>
             </div>
         </nav>
     </header>
 
+
+
     <main role="main" class="pb-3">
-        <div class="container">
-            @RenderBody()
-        </div>
+        @RenderBody()
     </main>
 
     <footer class="footer mt-auto text-white">
