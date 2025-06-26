@@ -1,32 +1,25 @@
-﻿@using Microsoft.AspNetCore.Identity
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - QuizApp</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
     <style>
-        /* Genel site düzeni için temel ayarlar */
-        html, body {
-            height: 100%;
+        body {
             margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            background-color: #f2f2f2; /* Genel açık arka plan */
             display: flex;
             flex-direction: column;
         }
 
-        /* Quiz sayfası kendisi özel bir arka plan ayarladığı için burası yorumda */
-        /* body {
-            background-color: #F2F2F2;
-        } */
-
         .navbar {
-            background-color: #660099; /* Deep purple */
+            background-color: #660099; /* Mor arka plan */
         }
 
         .navbar-brand, .nav-link, .footer-text {
@@ -40,18 +33,11 @@
             position: relative;
             bottom: 0;
             width: 100%;
+            color: white;
         }
 
         main {
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .card:hover {
-            transform: scale(1.03);
-            transition: all 0.3s ease;
         }
     </style>
 
@@ -66,13 +52,11 @@
         </nav>
     </header>
 
-
-
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 
-    <footer class="footer mt-auto text-white">
+    <footer class="footer mt-auto">
         <div class="footer-text">
             © @DateTime.Now.Year QuizApp | Geliştirici: Sena Pazar
         </div>

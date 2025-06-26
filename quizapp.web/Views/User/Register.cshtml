@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Kayıt Ol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a2a, #1a0a3a);
+            color: #e0e0e0;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .register-container {
+            max-width: 500px;
+            margin: 80px auto;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+        }
+
+        .form-control {
+            background-color: transparent;
+            border: 1px solid #ff00ff;
+            color: white;
+        }
+
+            .form-control:focus {
+                background-color: transparent;
+                color: white;
+                border-color: #00ffff;
+                box-shadow: 0 0 10px #00ffff;
+            }
+
+        .btn-register {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            border: none;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+        }
+
+            .btn-register:hover {
+                background: linear-gradient(45deg, #00ffff, #ff00ff);
+                box-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
+            }
+
+        .error-message {
+            color: #ff8080;
+            margin-top: 10px;
+        }
+
+        a.login-link {
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+            a.login-link:hover {
+                text-decoration: underline;
+                color: #ff00ff;
+            }
+    </style>
+}
+
+<div class="register-container">
+    <h2 class="text-center mb-4"><i class="bi bi-person-plus-fill text-warning"></i> Kayıt Ol</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="error-message text-center">@ViewBag.Error</div>
+    }
+
+    <form method="post">
+        <div class="mb-3">
+            <label for="userName" class="form-label">Kullanıcı Adı</label>
+            <input type="text" name="userName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Şifre</label>
+            <input type="password" name="password" class="form-control" required />
+        </div>
+
+        <button type="submit" class="btn btn-register">Kayıt Ol</button>
+    </form>
+
+    <div class="text-center mt-3">
+        Zaten hesabınız var mı? <a href="/User/Login" class="login-link">Giriş Yap</a>
+    </div>
+</div>

@@ -1,45 +1,30 @@
 ﻿<Properties StartupConfiguration="{2BAF07FA-D136-40B1-8EB3-B509AE52FC7E}|https">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.quizapp.web PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="quizapp.web/Views/Quiz/Index.cshtml">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.Workbench ActiveDocument="quizapp.web/Controllers/UserController.cs">
     <Files>
-      <File FileName="quizapp.web/Controllers/QuizController.cs" />
-      <File FileName="quizapp.web/Views/Quiz/QuizFinished.cshtml" />
-      <File FileName="quizapp.web/Views/Quiz/Start.cshtml" />
-      <File FileName="quizapp.web/Views/Quiz/Index.cshtml" Line="86" Column="3" />
-      <File FileName="quizapp.web/Controllers/UserController.cs" />
-      <File FileName="quizapp.web/appsettings.json" />
-      <File FileName="quizapp.web/Program.cs" />
-      <File FileName="quizapp.web/Views/User/Index.cshtml" />
+      <File FileName="quizapp.web/Views/Quiz/Start.cshtml" Line="26" Column="1" />
+      <File FileName="quizapp.data/Models/Question.cs" />
+      <File FileName="quizapp.data/Models/Answer.cs" />
+      <File FileName="quizapp.data/Models/Quiz.cs" />
       <File FileName="quizapp.web/Views/Shared/_Layout.cshtml" />
+      <File FileName="quizapp.web/Views/Quiz/QuizFinished.cshtml" />
+      <File FileName="quizapp.web/Views/Quiz/Index.cshtml" Line="126" Column="1" />
+      <File FileName="quizapp.web/Controllers/QuizController.cs" Line="96" Column="41" />
+      <File FileName="quizapp.web/Controllers/UserController.cs" Line="35" Column="47" />
+      <File FileName="quizapp.web/Views/User/Index.cshtml" Line="93" Column="1" />
+      <File FileName="quizapp.web/Program.cs" Line="45" Column="1" />
+      <File FileName="quizapp.web/Views/User/Refister.cshtml" Line="76" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="quizapp">
-            <Node name="quizapp.data" expanded="True">
-              <Node name="Dependencies" expanded="True" />
-              <Node name="Models" expanded="True" />
-            </Node>
-            <Node name="quizapp.web" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Quiz" expanded="True">
-                  <Node name="Index.cshtml" selected="True" />
-                </Node>
-                <Node name="Shared" expanded="True" />
-                <Node name="User" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="quizapp" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.quizapp.web PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

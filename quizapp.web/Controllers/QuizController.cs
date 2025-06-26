@@ -50,21 +50,21 @@ namespace quizapp.web.Controllers
 
             ViewBag.QuizId = quizId;
 
-            // Geri tuşu için önceki soru id’si
-            var previousQuestion = _context.Questions
-                .Where(q => q.QuizId == quizId && q.QuestionId < question.QuestionId)
-                .OrderByDescending(q => q.QuestionId)
-                .FirstOrDefault();
+            // Tüm soruları sırala
+            var questions = _context.Questions
+                .Where(q => q.QuizId == quizId)
+                .OrderBy(q => q.QuestionId)
+                .ToList();
 
-            if (previousQuestion != null)
-            {
-                ViewBag.HasPreviousQuestion = true;
-                ViewBag.PreviousQuestionId = previousQuestion.QuestionId;
-            }
-            else
-            {
-                ViewBag.HasPreviousQuestion = false;
-            }
+            int currentIndex = questions.FindIndex(q => q.QuestionId == question.QuestionId);
+
+            // Önceki soru kontrolü
+            ViewBag.HasPreviousQuestion = currentIndex > 0;
+            ViewBag.PreviousQuestionId = currentIndex > 0 ? questions[currentIndex - 1].QuestionId : 0;
+
+            // Sonraki soru kontrolü
+            ViewBag.HasNextQuestion = currentIndex < questions.Count - 1;
+            ViewBag.NextQuestionId = currentIndex < questions.Count - 1 ? questions[currentIndex + 1].QuestionId : 0;
 
             if (TempData.ContainsKey("IsCorrect"))
                 ViewBag.IsCorrect = (bool)TempData["IsCorrect"];
@@ -100,16 +100,21 @@ namespace quizapp.web.Controllers
 
             if (nextQuestion == null)
             {
-                return RedirectToAction("QuizFinished");
+                return RedirectToAction("QuizFinished", new { quizId = quizId });
             }
 
             return RedirectToAction("Start", new { quizId = quizId, questionId = nextQuestion.QuestionId });
         }
 
-        public IActionResult QuizFinished()
+        public IActionResult QuizFinished(int quizId)
         {
             int finalScore = HttpContext.Session.GetInt32("Score") ?? 0;
             ViewBag.FinalScore = finalScore;
+            ViewBag.QuizId = quizId;
+
+            var quiz = _context.Quizzes.FirstOrDefault(q => q.QuizId == quizId);
+            ViewBag.QuizTitle = quiz?.QuizTitle ?? "Quiz";
+
             return View();
         }
     }

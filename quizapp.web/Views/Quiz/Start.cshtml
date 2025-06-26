@@ -7,9 +7,7 @@
 }
 
 <!-- Font Awesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-papbSg+Wt1q+lh5YFvRXA+fYffDWXmrLXhbTytW2PEz09uF2WnBiAAOJ1JeUY9fo3snIxox+5O8c8hSLVxKjwQ=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="container py-5 quiz-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -27,10 +25,9 @@
     </div>
 
     <div class="question-box mb-4">
-        <div class="lightbulb-icon">
-            <i class="fas fa-lightbulb"></i>
+        <div class="question-icon">
+            <i class="fa-solid fa-question"></i>
         </div>
-
         <h2 class="question-text">@Model.Text</h2>
     </div>
 
@@ -53,6 +50,15 @@
     </form>
 </div>
 
+<!-- Modal Uyarı -->
+<div id="warningModal" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+        <h3>Uyarı</h3>
+        <p>Lütfen bir cevap seçiniz.</p>
+        <button id="modalCloseBtn">Tamam</button>
+    </div>
+</div>
+
 <style>
     body {
         background: linear-gradient(135deg, #0a0a2a 0%, #1a0a3a 100%);
@@ -63,6 +69,19 @@
         justify-content: center;
         align-items: center;
         margin: 0;
+    }
+
+    .question-icon {
+        font-size: 40px;
+        color: #ffd700; /* parlak sarı */
+        filter: drop-shadow(0 0 10px #ffd700); /* sarı parıltı */
+        transition: filter 0.3s ease;
+        margin-right: 20px;
+    }
+
+    .question-icon:hover {
+        filter: drop-shadow(0 0 18px #fff700);
+        cursor: pointer;
     }
 
     .quiz-container {
@@ -83,9 +102,7 @@
         align-items: center;
         justify-content: center;
         min-height: 120px;
-        box-shadow: 0 0 10px rgba(100, 255, 255, 0.6),
-                    0 0 20px rgba(100, 255, 255, 0.4),
-                    0 0 30px rgba(100, 255, 255, 0.2);
+        box-shadow: 0 0 10px rgba(100, 255, 255, 0.6), 0 0 20px rgba(100, 255, 255, 0.4), 0 0 30px rgba(100, 255, 255, 0.2);
         animation: glow 1.5s infinite alternate;
     }
 
@@ -114,19 +131,6 @@
         text-shadow: 0 0 5px rgba(255,255,255,0.7);
     }
 
-    .lightbulb-icon {
-        font-size: 40px;
-        color: #ffd700;
-        filter: drop-shadow(0 0 12px #ffd700);
-        transition: filter 0.3s ease;
-        margin-right: 20px;
-    }
-
-    .lightbulb-icon:hover {
-        filter: drop-shadow(0 0 18px #fff700);
-        cursor: pointer;
-    }
-
     .answer-option {
         background-color: transparent;
         border: 2px solid transparent;
@@ -137,8 +141,7 @@
         user-select: none;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 0 5px rgba(100, 255, 255, 0.3),
-                    0 0 10px rgba(100, 255, 255, 0.2);
+        box-shadow: 0 0 5px rgba(100, 255, 255, 0.3), 0 0 10px rgba(100, 255, 255, 0.2);
     }
 
     .answer-option::before {
@@ -165,8 +168,7 @@
 
     .answer-option:hover {
         transform: translateY(-2px);
-        box-shadow: 0 0 15px rgba(100, 255, 255, 0.7),
-                    0 0 25px rgba(100, 255, 255, 0.5);
+        box-shadow: 0 0 15px rgba(100, 255, 255, 0.7), 0 0 25px rgba(100, 255, 255, 0.5);
     }
 
     .form-check-input {
@@ -213,33 +215,118 @@
         font-size: 1.2rem;
         padding: 15px 30px;
         border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7),
-                    0 0 25px rgba(0, 255, 255, 0.5);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 25px rgba(0, 255, 255, 0.5);
         transition: all 0.3s ease;
     }
 
     .submit-button:hover {
         background: linear-gradient(45deg, #ff00ff, #00ffff);
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.9),
-                    0 0 30px rgba(0, 255, 255, 0.7);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.9), 0 0 30px rgba(0, 255, 255, 0.7);
         transform: translateY(-2px);
     }
 
     @@keyframes glow {
         0% {
-            box-shadow: 0 0 10px rgba(100, 255, 255, 0.6),
-                        0 0 20px rgba(100, 255, 255, 0.4),
-                        0 0 30px rgba(100, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(100, 255, 255, 0.6), 0 0 20px rgba(100, 255, 255, 0.4), 0 0 30px rgba(100, 255, 255, 0.2);
         }
+
         50% {
-            box-shadow: 0 0 15px rgba(100, 255, 255, 0.8),
-                        0 0 25px rgba(100, 255, 255, 0.6),
-                        0 0 35px rgba(100, 255, 255, 0.4);
+            box-shadow: 0 0 15px rgba(100, 255, 255, 0.8), 0 0 25px rgba(100, 255, 255, 0.6), 0 0 35px rgba(100, 255, 255, 0.4);
         }
+
         100% {
-            box-shadow: 0 0 10px rgba(100, 255, 255, 0.6),
-                        0 0 20px rgba(100, 255, 255, 0.4),
-                        0 0 30px rgba(100, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(100, 255, 255, 0.6), 0 0 20px rgba(100, 255, 255, 0.4), 0 0 30px rgba(100, 255, 255, 0.2);
         }
     }
+
+    @@keyframes shake {
+        0% { transform: translateX(0); }
+        20% { transform: translateX(-8px); }
+        40% { transform: translateX(8px); }
+        60% { transform: translateX(-6px); }
+        80% { transform: translateX(6px); }
+        100% { transform: translateX(0); }
+    }
+
+    .shake {
+        animation: shake 0.4s ease;
+    }
+
+
+    /* Modal CSS */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+
+    .modal-content {
+        background: #222;
+        padding: 30px 40px;
+        border-radius: 10px;
+        text-align: center;
+        color: #ffd700;
+        box-shadow: 0 0 20px #ffd700;
+        max-width: 320px;
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+
+    .modal-content h3 {
+        margin-bottom: 15px;
+        font-size: 1.6rem;
+    }
+
+    .modal-content button {
+        background: linear-gradient(45deg, #00ffff, #ff00ff);
+        border: none;
+        color: white;
+        padding: 10px 25px;
+        font-weight: bold;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 0 10px #ff00ff;
+        transition: background 0.3s ease;
+    }
+
+    .modal-content button:hover {
+        background: linear-gradient(45deg, #ff00ff, #00ffff);
+    }
 </style>
+
+<script>document.getElementById("answerForm").addEventListener("submit", function (e) {
+        const radios = document.querySelectorAll('input[name="selectedAnswerId"]');
+        let selected = false;
+        const submitBtn = document.querySelector('.submit-button');
+
+        for (const radio of radios) {
+            if (radio.checked) {
+                selected = true;
+                break;
+            }
+        }
+
+        if (!selected) {
+            e.preventDefault();
+            // Modalı göster
+            const modal = document.getElementById('warningModal');
+            modal.style.display = 'flex';
+
+            // Shake animasyonu submit butona ekle
+            submitBtn.classList.add('shake');
+            setTimeout(() => submitBtn.classList.remove('shake'), 400);
+        }
+    });
+
+    // Modal kapatma butonu
+    document.getElementById('modalCloseBtn').addEventListener('click', function () {
+        document.getElementById('warningModal').style.display = 'none';
+    });</script>
