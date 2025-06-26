@@ -92,6 +92,21 @@ namespace quizapp.web.Controllers
             TempData["IsCorrect"] = isCorrect;
             TempData["SelectedAnswerId"] = selectedAnswerId;
 
+            // Kullanıcı ID'yi al ve cevabı kaydet
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId != null)
+            {
+                var usersAnswer = new UsersAnswer
+                {
+                    UserId = userId.Value,
+                    AnswerId = selectedAnswerId
+                };
+
+                _context.UsersAnswers.Add(usersAnswer);
+                _context.SaveChanges();
+            }
+
             var nextQuestion = _context.Questions
                 .Include(q => q.Answers)
                 .Where(q => q.QuizId == quizId && q.QuestionId > questionId)
